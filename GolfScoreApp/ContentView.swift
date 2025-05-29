@@ -8,33 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+  @State private var savedRound: Round?
+  
     var body: some View {
-      NavigationStack {
-        VStack(spacing: 24) {
-            NavigationLink("新しいラウンドを開始") {
-                RoundSetupView()
-            }
-            .font(.title2)
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.green)
-            .foregroundColor(.white)
-            .cornerRadius(12)
-            .padding(.horizontal)
-
-            NavigationLink("履歴を見る") {
-                HistoryView()
-            }
-            .font(.title3)
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(12)
-            .padding(.horizontal)
-        }
-        .navigationTitle("ゴルフスコア")
-    }
+      MainTabView()
   }
 }
 

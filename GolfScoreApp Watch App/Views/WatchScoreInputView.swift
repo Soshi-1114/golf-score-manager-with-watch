@@ -10,16 +10,20 @@ import SwiftUI
 import SwiftUI
 
 struct WatchScoreInputView: View {
-    @State private var currentHole = 1
-    @State private var strokes = Array(repeating: 0, count: 18)
-    @State private var putts = Array(repeating: 0, count: 18)
+  @ObservedObject private var session = WatchSessionManager.shared
+  @State private var currentHole = 1
+  @State private var strokes = Array(repeating: 0, count: 18)
+  @State private var putts = Array(repeating: 0, count: 18)
   @State private var debounceTask: DispatchWorkItem?
-
 
     var body: some View {
         VStack(spacing: 8) {
-            Text("Hole \(currentHole)/18")
-                .font(.headline)
+          Text(session.roundName)
+              .font(.headline)
+              .multilineTextAlignment(.center)
+
+          Text("Hole \(currentHole) / \(session.holeCount)")
+              .font(.subheadline)
 
             HStack {
                 Button("-") {
