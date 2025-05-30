@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Binding var round: Round?
-    @Binding var showSetupSheet: Bool // ← 追加
+    @Binding var showSetupSheet: Bool
 
     @State private var averageScore: Int? = nil
     @State private var showConfirmation = false

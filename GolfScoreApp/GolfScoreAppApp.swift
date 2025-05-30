@@ -12,6 +12,7 @@ struct GolfScoreAppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            .environmentObject(AppModel.shared)
         }
     }
 }

@@ -30,6 +30,7 @@ struct MainTabView: View {
                       get: { savedRound },
                       set: { self.savedRound = $0 }
                   ))
+                  .id(savedRound.id)
                   .tabItem {
                       Label("スコア表", systemImage: "list.bullet.rectangle")
                   }
@@ -98,13 +99,17 @@ struct MainTabView: View {
                 isPresentingPreview = true
             }
         }
-        .onAppear {
-            savedRound = RoundPersistence.load()
+        .onReceive(AppModel.shared.$currentRound) { updatedRound in
+            if let round = updatedRound {
+              savedRound = round
+              WCSessionManager.shared.sendRoundToWatch(round: round)
+            }
         }
+
     }
 }
 
 
-#Preview {
-    MainTabView()
-}
+//#Preview {
+//    MainTabView()
+//}

@@ -64,7 +64,7 @@ struct RoundSetupView: View {
                     dismiss()
                     selectedTab = 1
                 }
-                .disabled(roundName.isEmpty || playerNames.isEmpty)
+                .disabled(roundName.isEmpty)
             }
         }
         .navigationTitle("ラウンドの設定")
@@ -132,35 +132,38 @@ struct RoundSetupView: View {
         }
     }
 
-    private func startRound() {
-        let players = [
-            PlayerScore(
-                id: UUID(),
-                name: userName,
-                holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 0, putts: 0) }
-            )
-        ] + playerNames.map { name in
-            PlayerScore(
-                id: UUID(),
-                name: name,
-                holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 0, putts: 0) }
-            )
-        }
+  private func startRound() {
+      let players = [
+          PlayerScore(
+              id: UUID(),
+              name: userName,
+              holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 0, putts: 0) }
+          )
+      ] + playerNames.map { name in
+          PlayerScore(
+              id: UUID(),
+              name: name,
+              holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 0, putts: 0) }
+          )
+      }
 
-        savedRound = Round(
-            id: UUID(),
-            date: Date(),
-            name: roundName,
-            players: players
-        )
+      let round = Round(
+          id: UUID(),
+          date: Date(),
+          name: roundName,
+          players: players
+      )
 
-        CompanionStorage.shared.save(names: savedCompanions)
+      savedRound = round
+      CompanionStorage.shared.save(names: savedCompanions)
 
-        PhoneSessionManager.shared.sendRoundToWatch(
-            roundName: roundName,
-            holeCount: players.first?.holeScores.count ?? 18
-        )
-    }
+      WCSessionManager.shared.sendRoundToWatch(round: round)
+      AppModel.shared.currentRound = round
+    RoundPersistence.save(savedRound!)
+
+    print("✅ ラウンド作成: \(round.name)")
+  }
+
 }
 
 struct MultipleSelectionRow: View {

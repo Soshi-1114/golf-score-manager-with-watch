@@ -13,13 +13,14 @@
 		1E3E13382DE71AEA00781B24 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E13372DE71AEA00781B24 /* MainTabView.swift */; };
 		1E3E133A2DE71D4400781B24 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E13392DE71D4400781B24 /* HomeView.swift */; };
 		1E3E133C2DE87CF500781B24 /* CompanionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E133B2DE87CF500781B24 /* CompanionStorage.swift */; };
+		1E3E13402DE8913A00781B24 /* WCSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E133F2DE8913A00781B24 /* WCSessionManager.swift */; };
+		1E3E13432DE89C2100781B24 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E13422DE89C2100781B24 /* AppModel.swift */; };
+		1E3E13462DE89CB000781B24 /* WatchWCSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3E13452DE89CB000781B24 /* WatchWCSessionManager.swift */; };
 		1E83D2F42DDB5ABC007A76B8 /* ScoreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E83D2F32DDB5ABC007A76B8 /* ScoreListView.swift */; };
 		1E83D2F62DDB65BD007A76B8 /* RoundStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E83D2F52DDB65BD007A76B8 /* RoundStorage.swift */; };
 		1E83D2F72DDB65BD007A76B8 /* RoundStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E83D2F52DDB65BD007A76B8 /* RoundStorage.swift */; };
 		1E83D2F92DDB6676007A76B8 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E83D2F82DDB6676007A76B8 /* HistoryView.swift */; };
 		1E83D2FE2DDC08C8007A76B8 /* WatchScoreInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E83D2FC2DDC08C8007A76B8 /* WatchScoreInputView.swift */; };
-		1E83D3002DDC09BC007A76B8 /* PhoneSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E83D2FF2DDC09BC007A76B8 /* PhoneSessionManager.swift */; };
-		1E83D3032DDC09FB007A76B8 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E83D3022DDC09FB007A76B8 /* WatchSessionManager.swift */; };
 		1E94BEEB2DD9D297004774F9 /* GolfScoreAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94BEEA2DD9D297004774F9 /* GolfScoreAppApp.swift */; };
 		1E94BEED2DD9D297004774F9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94BEEC2DD9D297004774F9 /* ContentView.swift */; };
 		1E94BEEF2DD9D299004774F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E94BEEE2DD9D299004774F9 /* Assets.xcassets */; };
@@ -66,12 +67,13 @@
 		1E3E13372DE71AEA00781B24 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		1E3E13392DE71D4400781B24 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1E3E133B2DE87CF500781B24 /* CompanionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionStorage.swift; sourceTree = "<group>"; };
+		1E3E133F2DE8913A00781B24 /* WCSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionManager.swift; sourceTree = "<group>"; };
+		1E3E13422DE89C2100781B24 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		1E3E13452DE89CB000781B24 /* WatchWCSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWCSessionManager.swift; sourceTree = "<group>"; };
 		1E83D2F32DDB5ABC007A76B8 /* ScoreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListView.swift; sourceTree = "<group>"; };
 		1E83D2F52DDB65BD007A76B8 /* RoundStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundStorage.swift; sourceTree = "<group>"; };
 		1E83D2F82DDB6676007A76B8 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		1E83D2FC2DDC08C8007A76B8 /* WatchScoreInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchScoreInputView.swift; sourceTree = "<group>"; };
-		1E83D2FF2DDC09BC007A76B8 /* PhoneSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneSessionManager.swift; sourceTree = "<group>"; };
-		1E83D3022DDC09FB007A76B8 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		1E94BEE72DD9D297004774F9 /* GolfScoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GolfScoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E94BEEA2DD9D297004774F9 /* GolfScoreAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfScoreAppApp.swift; sourceTree = "<group>"; };
 		1E94BEEC2DD9D297004774F9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E3E133E2DE8912400781B24 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1E3E133F2DE8913A00781B24 /* WCSessionManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		1E3E13442DE89C9800781B24 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1E3E13452DE89CB000781B24 /* WatchWCSessionManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		1E83D2FB2DDC08A1007A76B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +152,7 @@
 		1E94BEE92DD9D297004774F9 /* GolfScoreApp */ = {
 			isa = PBXGroup;
 			children = (
+				1E3E133E2DE8912400781B24 /* Managers */,
 				1E9EB3602DDB519D00396315 /* Views */,
 				1E9EB35C2DDB50C800396315 /* Models */,
 				1E94BEEA2DD9D297004774F9 /* GolfScoreAppApp.swift */,
@@ -141,7 +160,6 @@
 				1E94BEEE2DD9D299004774F9 /* Assets.xcassets */,
 				1E94BEF02DD9D299004774F9 /* Preview Content */,
 				1E83D2F52DDB65BD007A76B8 /* RoundStorage.swift */,
-				1E83D2FF2DDC09BC007A76B8 /* PhoneSessionManager.swift */,
 				1E3E13352DE5FFBA00781B24 /* RoundPersistence.swift */,
 				1E3E133B2DE87CF500781B24 /* CompanionStorage.swift */,
 			);
@@ -159,12 +177,12 @@
 		1E94BEFB2DD9D299004774F9 /* GolfScoreApp Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				1E3E13442DE89C9800781B24 /* Managers */,
 				1E83D2FB2DDC08A1007A76B8 /* Views */,
 				1E94BEFC2DD9D299004774F9 /* GolfScoreAppApp.swift */,
 				1E94BEFE2DD9D299004774F9 /* ContentView.swift */,
 				1E94BF002DD9D299004774F9 /* Assets.xcassets */,
 				1E94BF022DD9D299004774F9 /* Preview Content */,
-				1E83D3022DDC09FB007A76B8 /* WatchSessionManager.swift */,
 			);
 			path = "GolfScoreApp Watch App";
 			sourceTree = "<group>";
@@ -181,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				1E9EB35D2DDB50DE00396315 /* Models.swift */,
+				1E3E13422DE89C2100781B24 /* AppModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,11 +331,12 @@
 				1E9EB35E2DDB50DE00396315 /* Models.swift in Sources */,
 				1E83D2F62DDB65BD007A76B8 /* RoundStorage.swift in Sources */,
 				1E3E13382DE71AEA00781B24 /* MainTabView.swift in Sources */,
+				1E3E13402DE8913A00781B24 /* WCSessionManager.swift in Sources */,
+				1E3E13432DE89C2100781B24 /* AppModel.swift in Sources */,
 				1E83D2F42DDB5ABC007A76B8 /* ScoreListView.swift in Sources */,
 				1E9EB3622DDB51BE00396315 /* RoundSetupView.swift in Sources */,
 				1E94BEEB2DD9D297004774F9 /* GolfScoreAppApp.swift in Sources */,
 				1E3E13322DE5D14F00781B24 /* ScoreCell.swift in Sources */,
-				1E83D3002DDC09BC007A76B8 /* PhoneSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,12 +344,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E83D3032DDC09FB007A76B8 /* WatchSessionManager.swift in Sources */,
 				1E94BEFF2DD9D299004774F9 /* ContentView.swift in Sources */,
 				1E9EB35F2DDB50DE00396315 /* Models.swift in Sources */,
 				1E83D2F72DDB65BD007A76B8 /* RoundStorage.swift in Sources */,
 				1E94BEFD2DD9D299004774F9 /* GolfScoreAppApp.swift in Sources */,
 				1E83D2FE2DDC08C8007A76B8 /* WatchScoreInputView.swift in Sources */,
+				1E3E13462DE89CB000781B24 /* WatchWCSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

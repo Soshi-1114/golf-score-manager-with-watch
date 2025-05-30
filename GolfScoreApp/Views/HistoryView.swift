@@ -63,6 +63,8 @@ struct HistoryView: View {
                 Button("編集") {
                     if let selected = selectedRound {
                         savedRound = selected
+                        AppModel.shared.currentRound = selected
+                        WCSessionManager.shared.sendRoundToWatch(round: selected)
                         NotificationCenter.default.post(name: .navigateToScoreTab, object: nil)
                     }
                 }
@@ -83,7 +85,7 @@ struct HistoryView: View {
 
   private var dateFormatter: DateFormatter {
       let df = DateFormatter()
-      df.locale = Locale(identifier: "ja_JP") // 日本語ロケールを指定
+      df.locale = Locale(identifier: "ja_JP")
       df.dateFormat = "yyyy年MM月dd日"
       return df
   }

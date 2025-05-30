@@ -57,13 +57,13 @@ struct ScoreCell: View {
 
 
 
-#Preview {
-    VStack(spacing: 10) {
-        ScoreCell(score: 0, putt: 0, par: 4)
-        ScoreCell(score: 3, putt: 2, par: 4) // under par → 緑
-        ScoreCell(score: 4, putt: 2, par: 4) // par → 青
-        ScoreCell(score: 6, putt: 3, par: 4) // over par → 黒
-    }
-    .padding()
-    .previewLayout(.sizeThatFits)
-}
+//#Preview {
+//    VStack(spacing: 10) {
+//        ScoreCell(score: 0, putt: 0, par: 4)
+//        ScoreCell(score: 3, putt: 2, par: 4) // under par → 緑
+//        ScoreCell(score: 4, putt: 2, par: 4) // par → 青
+//        ScoreCell(score: 6, putt: 3, par: 4) // over par → 黒
+//    }
+//    .padding()
+//    .previewLayout(.sizeThatFits)
+//}

@@ -11,8 +11,6 @@ struct ScoreInputView: View {
   @Binding var round: Round
   @State private var currentHole: Int
   
-  @ObservedObject private var phoneSession = PhoneSessionManager.shared
-
   init(round: Binding<Round>, startHole: Int = 1) {
       _round = round
       _currentHole = State(initialValue: startHole)
@@ -98,14 +96,6 @@ struct ScoreInputView: View {
         }
       }
     }
-    .onReceive(phoneSession.$receivedStrokes) { newStrokes in
-        // Watchから来た配列の長さが18以上なら反映
-        guard newStrokes.count >= round.players.count * 18 else { return }
-        // プレイヤー1人目のスコアに反映する
-        for holeIdx in 0..<min(18, newStrokes.count) {
-            round.players[0].holeScores[holeIdx].strokes = newStrokes[holeIdx]
-        }
-      }
     .onDisappear {
         RoundPersistence.save(round)
     }
@@ -116,28 +106,28 @@ struct ScoreInputView: View {
 
 
 
-#Preview {
-    let mockPlayers = [
-        PlayerScore(
-            id: UUID(),
-            name: "山田",
-            holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 3, putts: 2) }
-        ),
-        PlayerScore(
-            id: UUID(),
-            name: "佐藤",
-            holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 4, putts: 1) }
-        )
-    ]
-
-    let mockRound = Round(
-        id: UUID(),
-        date: Date(),
-        name: "プレビューテストラウンド",
-        players: mockPlayers
-    )
-
-    return ScoreInputView(round: .constant(mockRound), startHole: 1)
-}
+//#Preview {
+//    let mockPlayers = [
+//        PlayerScore(
+//            id: UUID(),
+//            name: "山田",
+//            holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 3, putts: 2) }
+//        ),
+//        PlayerScore(
+//            id: UUID(),
+//            name: "佐藤",
+//            holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 4, putts: 1) }
+//        )
+//    ]
+//
+//    let mockRound = Round(
+//        id: UUID(),
+//        date: Date(),
+//        name: "プレビューテストラウンド",
+//        players: mockPlayers
+//    )
+//
+//    return ScoreInputView(round: .constant(mockRound), startHole: 1)
+//}
 
 

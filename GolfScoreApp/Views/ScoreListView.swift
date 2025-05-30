@@ -197,21 +197,11 @@ struct ScoreListView: View {
 }
 
 
-#Preview {
-    let mockPlayers = [
-        PlayerScore(
-            id: UUID(),
-            name: "山田",
-            holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: Int.random(in: 3...6), putts: Int.random(in: 1...3)) }
-        ),
-        PlayerScore(
-            id: UUID(),
-            name: "佐藤",
-            holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: Int.random(in: 3...6), putts: Int.random(in: 1...3)) }
-        ),
+//#Preview {
+//    let mockPlayers = [
 //        PlayerScore(
 //            id: UUID(),
-//            name: "佐藤",
+//            name: "山田",
 //            holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: Int.random(in: 3...6), putts: Int.random(in: 1...3)) }
 //        ),
 //        PlayerScore(
@@ -219,15 +209,15 @@ struct ScoreListView: View {
 //            name: "佐藤",
 //            holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: Int.random(in: 3...6), putts: Int.random(in: 1...3)) }
 //        )
-    ]
-
-    let mockRound = Round(
-        id: UUID(),
-        date: Date(),
-        name: "プレビューラウンド",
-        players: mockPlayers
-    )
-
-    return ScoreListView(round: .constant(mockRound), isEditable: true)
-}
+//    ]
+//
+//    let mockRound = Round(
+//        id: UUID(),
+//        date: Date(),
+//        name: "プレビューラウンド",
+//        players: mockPlayers
+//    )
+//
+//    return ScoreListView(round: .constant(mockRound), isEditable: true)
+//}
 

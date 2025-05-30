@@ -17,11 +17,11 @@ struct RoundPersistence {
     }
 
     static func load() -> Round? {
-        if let data = UserDefaults.standard.data(forKey: key),
-           let round = try? JSONDecoder().decode(Round.self, from: data) {
-            return round
-        }
-        return nil
+      guard let data = UserDefaults.standard.data(forKey: key),
+            let round = try? JSONDecoder().decode(Round.self, from: data) else {
+          return nil
+      }
+      return round
     }
 
     static func clear() {
