@@ -21,6 +21,7 @@
 		1E83D2F72DDB65BD007A76B8 /* RoundStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E83D2F52DDB65BD007A76B8 /* RoundStorage.swift */; };
 		1E83D2F92DDB6676007A76B8 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E83D2F82DDB6676007A76B8 /* HistoryView.swift */; };
 		1E83D2FE2DDC08C8007A76B8 /* WatchScoreInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E83D2FC2DDC08C8007A76B8 /* WatchScoreInputView.swift */; };
+		1E92BCD12DEA0DF400E73B3A /* HoleScorePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E92BCD02DEA0DF400E73B3A /* HoleScorePageView.swift */; };
 		1E94BEEB2DD9D297004774F9 /* GolfScoreAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94BEEA2DD9D297004774F9 /* GolfScoreAppApp.swift */; };
 		1E94BEED2DD9D297004774F9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94BEEC2DD9D297004774F9 /* ContentView.swift */; };
 		1E94BEEF2DD9D299004774F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E94BEEE2DD9D299004774F9 /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 		1E83D2F52DDB65BD007A76B8 /* RoundStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundStorage.swift; sourceTree = "<group>"; };
 		1E83D2F82DDB6676007A76B8 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		1E83D2FC2DDC08C8007A76B8 /* WatchScoreInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchScoreInputView.swift; sourceTree = "<group>"; };
+		1E92BCD02DEA0DF400E73B3A /* HoleScorePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleScorePageView.swift; sourceTree = "<group>"; };
 		1E94BEE72DD9D297004774F9 /* GolfScoreApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GolfScoreApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E94BEEA2DD9D297004774F9 /* GolfScoreAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfScoreAppApp.swift; sourceTree = "<group>"; };
 		1E94BEEC2DD9D297004774F9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				1E83D2FC2DDC08C8007A76B8 /* WatchScoreInputView.swift */,
+				1E92BCD02DEA0DF400E73B3A /* HoleScorePageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				1E94BEFD2DD9D299004774F9 /* GolfScoreAppApp.swift in Sources */,
 				1E83D2FE2DDC08C8007A76B8 /* WatchScoreInputView.swift in Sources */,
 				1E3E13462DE89CB000781B24 /* WatchWCSessionManager.swift in Sources */,
+				1E92BCD12DEA0DF400E73B3A /* HoleScorePageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
