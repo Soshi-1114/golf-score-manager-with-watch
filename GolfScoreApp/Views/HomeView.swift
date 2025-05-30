@@ -38,6 +38,7 @@ struct HomeView: View {
                             RoundStorage.shared.save(round: round)
                             RoundPersistence.clear()
                             self.round = nil
+                          WCSessionManager.shared.sendRoundClearedToWatch()
                         }
                         Button("キャンセル", role: .cancel) {}
                     }

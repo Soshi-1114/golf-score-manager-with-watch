@@ -9,6 +9,13 @@ import Foundation
 
 class AppModel: ObservableObject {
     static let shared = AppModel()
+  
+  @Published var isWatchSyncEnabled: Bool {
+      didSet {
+          // トグル変更時に即保存
+          UserDefaults.standard.set(isWatchSyncEnabled, forKey: "watchSyncEnabled")
+      }
+  }
 
   @Published var currentRound: Round? {
           didSet {
@@ -20,6 +27,7 @@ class AppModel: ObservableObject {
 
     private init() {
       self.currentRound = RoundPersistence.load()
+      self.isWatchSyncEnabled = UserDefaults.standard.object(forKey: "watchSyncEnabled") as? Bool ?? true
     }
 
     // MARK: - ラウンドの初期化

@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct RoundSetupView: View {
-    @Binding var savedRound: Round?
-    @Binding var selectedTab: Int
-    @Environment(\.dismiss) private var dismiss
+  @Binding var savedRound: Round?
+  @Binding var selectedTab: Int
+  @Environment(\.dismiss) private var dismiss
 
-    @State private var roundName = ""
-    @State private var playerNames: [String] = []
-    @State private var savedCompanions: [String] = []
-    @State private var showAddActionSheet = false
-    @State private var showNewCompanionAlert = false
-    @State private var showCompanionPicker = false
-    @State private var newCompanionName = ""
-    @State private var selectedCompanions: Set<String> = []
+  @State private var roundName = ""
+  @State private var playerNames: [String] = []
+  @State private var savedCompanions: [String] = []
+  @State private var showAddActionSheet = false
+  @State private var showNewCompanionAlert = false
+  @State private var showCompanionPicker = false
+  @State private var newCompanionName = ""
+  @State private var selectedCompanions: Set<String> = []
+  @State private var isWatchSyncEnabled: Bool = false
 
     let userName = "Me"
 
@@ -57,6 +58,10 @@ struct RoundSetupView: View {
                     }
                 }
             }
+          
+          Section {
+              Toggle("Apple Watch連携", isOn: $isWatchSyncEnabled)
+          }
 
             Section {
                 Button("ラウンド開始") {
@@ -156,12 +161,16 @@ struct RoundSetupView: View {
 
       savedRound = round
       CompanionStorage.shared.save(names: savedCompanions)
+      
+      // ✅ Watch連携がONのときだけ送信
+      if isWatchSyncEnabled {
+          WCSessionManager.shared.sendRoundToWatch(round: round)
+      }
 
-      WCSessionManager.shared.sendRoundToWatch(round: round)
       AppModel.shared.currentRound = round
-    RoundPersistence.save(savedRound!)
+      RoundPersistence.save(round)
 
-    print("✅ ラウンド作成: \(round.name)")
+      print("✅ ラウンド作成: \(round.name)")
   }
 
 }

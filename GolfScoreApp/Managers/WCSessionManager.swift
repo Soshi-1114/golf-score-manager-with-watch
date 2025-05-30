@@ -25,16 +25,20 @@ class WCSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     }
     
   func sendRoundToWatch(round: Round) {
-          if WCSession.default.isReachable {
-              do {
-                  let data = try JSONEncoder().encode(round)
-                  let message: [String: Any] = ["roundData": data]
-                  WCSession.default.sendMessage(message, replyHandler: nil, errorHandler: nil)
-              } catch {
-                  print("送信エラー: \(error.localizedDescription)")
-              }
-          }
-      }
+    guard AppModel.shared.isWatchSyncEnabled else {
+        print("⏹ Apple Watch連携がOFFのため、送信をスキップ")
+        return
+    }
+
+    if WCSession.default.isReachable {
+        do {
+            let data = try JSONEncoder().encode(round)
+            WCSession.default.sendMessage(["roundData": data], replyHandler: nil, errorHandler: nil)
+        } catch {
+            print("送信エラー: \(error.localizedDescription)")
+        }
+    }
+  }
     
   func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
           print("iPhone側メッセージ受信: \(message)")
@@ -48,18 +52,72 @@ class WCSessionManager: NSObject, ObservableObject, WCSessionDelegate {
       }
   
   func sendScoresToWatch(player: PlayerScore) {
-          let strokes = player.holeScores.map { $0.strokes }
-          let putts = player.holeScores.map { $0.putts }
+    guard AppModel.shared.isWatchSyncEnabled else {
+        print("⏹ Apple Watch連携がOFFのため、スコア送信をスキップ")
+        return
+    }
 
-          let message: [String: Any] = [
-              "strokes": strokes,
-              "putts": putts
-          ]
+    let strokes = player.holeScores.map { $0.strokes }
+    let putts = player.holeScores.map { $0.putts }
 
-          if WCSession.default.isReachable {
-              WCSession.default.sendMessage(message, replyHandler: nil, errorHandler: nil)
-          }
+    let message: [String: Any] = [
+        "strokes": strokes,
+        "putts": putts
+    ]
+
+    if WCSession.default.isReachable {
+        WCSession.default.sendMessage(message, replyHandler: nil, errorHandler: nil)
+    }
+  }
+  
+  func sendUnlinkSignalToWatch() {
+    let context: [String: Any] = [
+        "isWatchSyncEnabled": false,
+        "roundName": ""  // Watch側で未開始状態と判定しやすくする
+    ]
+    try? WCSession.default.updateApplicationContext(context)
+    
+  }
+
+  func sendRoundClearedToWatch() {
+      guard WCSession.default.isPaired,
+            WCSession.default.isWatchAppInstalled else {
+          print("Watch is not pairing")
+          return
       }
+
+      let context: [String: Any] = [
+          "isWatchSyncEnabled": true,
+          "roundName": "",
+          "strokes": Array(repeating: 0, count: 18),
+          "putts": Array(repeating: 0, count: 18)
+      ]
+
+      do {
+          try WCSession.default.updateApplicationContext(context)
+          print("Send end round to Watch")
+      } catch {
+          print("fale to send end round to Watch: \(error.localizedDescription)")
+      }
+  }
+  
+  func sendScoreToWatch(strokes: [Int], putts: [Int]) {
+      let context: [String: Any] = [
+          "isWatchSyncEnabled": true,
+          "roundName": AppModel.shared.currentRound?.name ?? "",
+          "strokes": strokes,
+          "putts": putts
+      ]
+      
+      do {
+          try WCSession.default.updateApplicationContext(context)
+          print("📤 Watchにスコアデータ送信")
+      } catch {
+          print("⚠️ スコア送信エラー: \(error)")
+      }
+  }
+
+
 
 
     // 必須デリゲートメソッド（空でOK）
@@ -67,7 +125,7 @@ class WCSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     func sessionDidBecomeInactive(_ session: WCSession) {}
   
   func sessionDidBecomeActive(_ session: WCSession) {
-      print("iPhone側でWCSessionがアクティブになりました")
+      print("Activate WCSession for iPhone")
   }
 
     func sessionDidDeactivate(_ session: WCSession) {}

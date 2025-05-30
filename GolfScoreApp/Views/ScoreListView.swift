@@ -13,20 +13,31 @@ struct ScoreListView: View {
   @State private var didRegister = false
   @Environment(\.dismiss) private var dismiss
   var isEditable: Bool = true
+  
+  @AppStorage("isWatchSyncEnabled") private var isWatchSyncEnabled = false
 
     var body: some View {
       VStack(spacing: 0) {
-          // スコアカードタイトル + 登録ボタン 横並び
+          // スコアカードタイトル + Watch連携トグル 横並び
           HStack(spacing: 0) {
               Text("スコアカード")
                   .font(.title2)
                   .bold()
               Spacer()
-            if !isEditable {
-                Text("（編集不可）")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .padding(.leading, 4)
+            
+            if isEditable {
+              Toggle(isOn: $isWatchSyncEnabled) {
+                Text("Watch連携")
+                  .font(.caption)
+              }
+              .toggleStyle(SwitchToggleStyle(tint: .green))
+              .frame(width: 150)
+              
+            } else {
+              Text("（編集不可）")
+                  .font(.subheadline)
+                  .foregroundColor(.gray)
+                  .padding(.leading, 4)
             }
           }
           .padding(.horizontal)
@@ -193,6 +204,21 @@ struct ScoreListView: View {
           }
       }
       .navigationBarTitleDisplayMode(.inline)
+      .onChange(of: isWatchSyncEnabled) { _, newValue in
+        if newValue {
+            WCSessionManager.shared.sendRoundToWatch(round: round)
+            
+            let strokes = round.players.first?.holeScores.map { $0.strokes } ?? Array(repeating: 0, count: 18)
+            let putts = round.players.first?.holeScores.map { $0.putts } ?? Array(repeating: 0, count: 18)
+            WCSessionManager.shared.sendScoreToWatch(strokes: strokes, putts: putts)
+
+            print("🔗 Watch連携ON: スコア情報を送信しました")
+        } else {
+            WCSessionManager.shared.sendUnlinkSignalToWatch()
+            print("🔕 Watch連携OFF: 非連携メッセージを送信しました")
+        }
+      }
+
     }
 }
 

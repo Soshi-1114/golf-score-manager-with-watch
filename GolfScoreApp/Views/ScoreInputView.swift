@@ -6,15 +6,37 @@
 //
 
 import SwiftUI
+import WatchConnectivity
 
 struct ScoreInputView: View {
   @Binding var round: Round
   @State private var currentHole: Int
+  @State private var debounceTask: DispatchWorkItem?
+
+  @AppStorage("isWatchSyncEnabled") private var isWatchSyncEnabled = false
   
   init(round: Binding<Round>, startHole: Int = 1) {
       _round = round
       _currentHole = State(initialValue: startHole)
   }
+  
+  func sendScoreToWatch() {
+      guard isWatchSyncEnabled else { return }
+
+      // 前の送信タスクがあればキャンセル
+      debounceTask?.cancel()
+
+      // 新しい送信タスク
+      let task = DispatchWorkItem {
+          let strokes = round.players.first?.holeScores.map { $0.strokes } ?? Array(repeating: 0, count: 18)
+          let putts = round.players.first?.holeScores.map { $0.putts } ?? Array(repeating: 0, count: 18)
+          WCSessionManager.shared.sendScoreToWatch(strokes: strokes, putts: putts)
+      }
+
+      debounceTask = task
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: task) // 0.4秒待ってから送信
+  }
+
 
 
   var body: some View {
@@ -57,16 +79,16 @@ struct ScoreInputView: View {
               .font(.headline)
 
             let scoreIndex = currentHole - 1
-            let strokes = player.holeScores[scoreIndex].strokes
-            let putts = player.holeScores[scoreIndex].putts
+            let strokesBinding = $player.holeScores[scoreIndex].strokes
+            let puttsBinding = $player.holeScores[scoreIndex].putts
 
             HStack(alignment: .top) {
               // 左側：打数 / パット数 表示
               VStack(alignment: .leading, spacing: 2) {
-                Text("\(strokes)")
-                  .font(.system(size: 40, weight: .bold, design: .default))
-                + Text(" / \(putts)")
-                  .font(.system(size: 20, weight: .bold, design: .default))
+                Text("\(player.holeScores[scoreIndex].strokes)")
+                  .font(.system(size: 40, weight: .bold))
+                + Text(" / \(player.holeScores[scoreIndex].putts)")
+                  .font(.system(size: 20, weight: .bold))
                   .foregroundColor(.gray)
               }
 
@@ -76,15 +98,19 @@ struct ScoreInputView: View {
               VStack(alignment: .trailing, spacing: 8) {
                 HStack {
                   Text("打数:")
-                    .fixedSize()
-                  Stepper("", value: $player.holeScores[scoreIndex].strokes, in: 0...20)
+                  Stepper("", value: strokesBinding, in: 0...20)
                     .labelsHidden()
+                    .onChange(of: strokesBinding.wrappedValue) {
+                        sendScoreToWatch()
+                    }
                 }
                 HStack {
                   Text("パット:")
-                    .fixedSize()
-                  Stepper("", value: $player.holeScores[scoreIndex].putts, in: 0...10)
+                  Stepper("", value: puttsBinding, in: 0...10)
                     .labelsHidden()
+                    .onChange(of: puttsBinding.wrappedValue) {
+                      sendScoreToWatch()
+                    }
                 }
               }
               .font(.subheadline)
