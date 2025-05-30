@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  RoundSetupView.swift
 //  GolfScoreApp
 //
 //  Created by 本村壮志 on 2025/05/19.
@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct RoundSetupView: View {
-  @Binding var savedRound: Round?
-  @Binding var selectedTab: Int
-  @Environment(\.dismiss) private var dismiss
+    @Binding var savedRound: Round?
+    @Binding var selectedTab: Int
+    @Environment(\.dismiss) private var dismiss
 
-  @State private var roundName = ""
-  @State private var playerNames: [String] = []
-  @State private var savedCompanions: [String] = []
-  @State private var showAddActionSheet = false
-  @State private var showNewCompanionAlert = false
-  @State private var showCompanionPicker = false
-  @State private var newCompanionName = ""
-  @State private var selectedCompanions: Set<String> = []
-  @State private var isWatchSyncEnabled: Bool = false
+    @State private var roundName = ""
+    @State private var playerNames: [String] = []
+    @State private var savedCompanions: [String] = []
+    @State private var showAddActionSheet = false
+    @State private var showNewCompanionAlert = false
+    @State private var showCompanionPicker = false
+    @State private var newCompanionName = ""
+    @State private var selectedCompanions: Set<String> = []
+    @State private var isWatchSyncEnabled: Bool = false
 
     let userName = "Me"
 
@@ -34,23 +34,22 @@ struct RoundSetupView: View {
                 Text(userName)
                     .foregroundColor(.gray)
 
-              ForEach(playerNames, id: \.self) { name in
-                  HStack {
-                      Text(name)
-                      Spacer()
-                      Button(action: {
-                          if let index = playerNames.firstIndex(of: name) {
-                              playerNames.remove(at: index)
-                          }
-                      }) {
-                          Image(systemName: "minus.circle")
-                              .foregroundColor(.red)
-                      }
-                      .buttonStyle(BorderlessButtonStyle()) // リストでの動作安定化
-                  }
-                  .padding(.vertical, 4)
-              }
-
+                ForEach(playerNames, id: \.self) { name in
+                    HStack {
+                        Text(name)
+                        Spacer()
+                        Button(action: {
+                            if let index = playerNames.firstIndex(of: name) {
+                                playerNames.remove(at: index)
+                            }
+                        }) {
+                            Image(systemName: "minus.circle")
+                                .foregroundColor(.red)
+                        }
+                        .buttonStyle(BorderlessButtonStyle()) // リストでの動作安定化
+                    }
+                    .padding(.vertical, 4)
+                }
 
                 if playerNames.count < 3 {
                     Button("同伴者を追加する") {
@@ -58,10 +57,10 @@ struct RoundSetupView: View {
                     }
                 }
             }
-          
-          Section {
-              Toggle("Apple Watch連携", isOn: $isWatchSyncEnabled)
-          }
+
+            Section {
+                Toggle("Apple Watch連携", isOn: $isWatchSyncEnabled)
+            }
 
             Section {
                 Button("ラウンド開始") {
@@ -84,7 +83,7 @@ struct RoundSetupView: View {
                 .default(Text("同伴者一覧から選択")) {
                     showCompanionPicker = true
                 },
-                .cancel()
+                .cancel(),
             ])
         }
         .alert("同伴者を追加", isPresented: $showNewCompanionAlert, actions: {
@@ -137,42 +136,41 @@ struct RoundSetupView: View {
         }
     }
 
-  private func startRound() {
-      let players = [
-          PlayerScore(
-              id: UUID(),
-              name: userName,
-              holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 0, putts: 0) }
-          )
-      ] + playerNames.map { name in
-          PlayerScore(
-              id: UUID(),
-              name: name,
-              holeScores: (1...18).map { HoleScore(holeNumber: $0, strokes: 0, putts: 0) }
-          )
-      }
+    private func startRound() {
+        let players = [
+            PlayerScore(
+                id: UUID(),
+                name: userName,
+                holeScores: (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 0, putts: 0) }
+            ),
+        ] + playerNames.map { name in
+            PlayerScore(
+                id: UUID(),
+                name: name,
+                holeScores: (1 ... 18).map { HoleScore(holeNumber: $0, strokes: 0, putts: 0) }
+            )
+        }
 
-      let round = Round(
-          id: UUID(),
-          date: Date(),
-          name: roundName,
-          players: players
-      )
+        let round = Round(
+            id: UUID(),
+            date: Date(),
+            name: roundName,
+            players: players
+        )
 
-      savedRound = round
-      CompanionStorage.shared.save(names: savedCompanions)
-      
-      // ✅ Watch連携がONのときだけ送信
-      if isWatchSyncEnabled {
-          WCSessionManager.shared.sendRoundToWatch(round: round)
-      }
+        savedRound = round
+        CompanionStorage.shared.save(names: savedCompanions)
 
-      AppModel.shared.currentRound = round
-      RoundPersistence.save(round)
+        // ✅ Watch連携がONのときだけ送信
+        if isWatchSyncEnabled {
+            WCSessionManager.shared.sendRoundToWatch(round: round)
+        }
 
-      print("✅ ラウンド作成: \(round.name)")
-  }
+        AppModel.shared.currentRound = round
+        RoundPersistence.save(round)
 
+        print("✅ ラウンド作成: \(round.name)")
+    }
 }
 
 struct MultipleSelectionRow: View {
@@ -192,7 +190,6 @@ struct MultipleSelectionRow: View {
         }
     }
 }
-
 
 #Preview {
     struct PreviewWrapper: View {

@@ -13,7 +13,8 @@ class RoundStorage {
 
     func load() -> [Round] {
         guard let data = UserDefaults.standard.data(forKey: storageKey),
-              let rounds = try? JSONDecoder().decode([Round].self, from: data) else {
+              let rounds = try? JSONDecoder().decode([Round].self, from: data)
+        else {
             return []
         }
         return rounds
@@ -21,7 +22,7 @@ class RoundStorage {
 
     func save(round: Round) {
         var rounds = load()
-        
+
         if let index = rounds.firstIndex(where: { $0.id == round.id }) {
             // 既存のラウンドがある → 上書き
             rounds[index] = round
@@ -51,6 +52,3 @@ class RoundStorage {
         UserDefaults.standard.removeObject(forKey: storageKey)
     }
 }
-
-
-

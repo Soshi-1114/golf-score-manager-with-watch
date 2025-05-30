@@ -20,4 +20,3 @@ class CompanionStorage {
         UserDefaults.standard.stringArray(forKey: key) ?? []
     }
 }
-

@@ -13,9 +13,8 @@ struct MainTabView: View {
     @State private var selectedHoleIndex: Int? = nil
     @State private var isPresentingInput = false
     @State private var isPresentingSetupSheet = false
-  @State private var previewRound: Round? = nil
-  @State private var isPresentingPreview = false
-
+    @State private var previewRound: Round? = nil
+    @State private var isPresentingPreview = false
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -26,31 +25,30 @@ struct MainTabView: View {
                 .tag(0)
 
             if let savedRound = savedRound {
-              ScoreListView(round: Binding(
-                      get: { savedRound },
-                      set: { self.savedRound = $0 }
-                  ))
-                  .id(savedRound.id)
-                  .tabItem {
-                      Label("スコア表", systemImage: "list.bullet.rectangle")
-                  }
-                  .tag(1)
+                ScoreListView(round: Binding(
+                    get: { savedRound },
+                    set: { self.savedRound = $0 }
+                ))
+                .id(savedRound.id)
+                .tabItem {
+                    Label("スコア表", systemImage: "list.bullet.rectangle")
+                }
+                .tag(1)
             } else {
-              VStack(spacing: 12) {
-                  Text("入力中のスコアデータがありません")
-                      .font(.headline)
-                      .foregroundColor(.gray)
-                  Text("ホーム画面でラウンドを開始するか、\n履歴画面から編集するラウンドを選択してください。")
-                      .font(.subheadline)
-                      .foregroundColor(.secondary)
-                      .multilineTextAlignment(.center)
-                      .padding(.horizontal)
-              }
-              .tabItem {
-                  Label("スコア表", systemImage: "list.bullet.rectangle")
-              }
-              .tag(1)
-
+                VStack(spacing: 12) {
+                    Text("入力中のスコアデータがありません")
+                        .font(.headline)
+                        .foregroundColor(.gray)
+                    Text("ホーム画面でラウンドを開始するか、\n履歴画面から編集するラウンドを選択してください。")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                }
+                .tabItem {
+                    Label("スコア表", systemImage: "list.bullet.rectangle")
+                }
+                .tag(1)
             }
 
             HistoryView(savedRound: $savedRound)
@@ -61,7 +59,8 @@ struct MainTabView: View {
         }
         .sheet(isPresented: $isPresentingInput) {
             if let _ = savedRound,
-               let index = selectedHoleIndex {
+               let index = selectedHoleIndex
+            {
                 ScoreInputView(
                     round: Binding(
                         get: { savedRound! },
@@ -101,15 +100,13 @@ struct MainTabView: View {
         }
         .onReceive(AppModel.shared.$currentRound) { updatedRound in
             if let round = updatedRound {
-              savedRound = round
-              WCSessionManager.shared.sendRoundToWatch(round: round)
+                savedRound = round
+                WCSessionManager.shared.sendRoundToWatch(round: round)
             }
         }
-
     }
 }
 
-
-//#Preview {
+// #Preview {
 //    MainTabView()
-//}
+// }

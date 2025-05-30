@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RoundPersistence {
+enum RoundPersistence {
     private static let key = "currentRound"
 
     static func save(_ round: Round) {
@@ -17,16 +17,16 @@ struct RoundPersistence {
     }
 
     static func load() -> Round? {
-      guard let data = UserDefaults.standard.data(forKey: key),
-            let round = try? JSONDecoder().decode(Round.self, from: data) else {
-          return nil
-      }
-      return round
+        guard let data = UserDefaults.standard.data(forKey: key),
+              let round = try? JSONDecoder().decode(Round.self, from: data)
+        else {
+            return nil
+        }
+        return round
     }
 
     static func clear() {
-      print("clear called")
+        print("clear called")
         UserDefaults.standard.removeObject(forKey: key)
     }
 }
-

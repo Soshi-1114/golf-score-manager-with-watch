@@ -11,10 +11,10 @@ import SwiftUI
 struct GolfScoreApp_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
-          WatchScoreInputView()
-            .onAppear {
-                WatchWCSessionManager.shared.activateSession()
-            }
+            WatchScoreInputView()
+                .onAppear {
+                    WatchWCSessionManager.shared.activateSession()
+                }
         }
     }
 }

@@ -23,12 +23,12 @@ class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     }
 
     // ✅ 必須: watchOS でのセッションの有効化結果
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    func session(_: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error _: Error?) {
         print("Watch WCSession activated: \(activationState.rawValue)")
     }
 
     // ✅ 任意: iPhone → Watch のデータ受信（ラウンド情報）
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+    func session(_: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {
             if let name = message["roundName"] as? String {
                 self.roundName = name
@@ -48,5 +48,3 @@ class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
         }
     }
 }
-
-

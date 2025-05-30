@@ -21,36 +21,36 @@ struct HistoryView: View {
                         selectedRound = round
                         showEditConfirmation = true
                     } label: {
-                      HStack {
-                        VStack(alignment: .leading) {
-                          if let player = round.players.first {
-                              let totalStrokes = player.holeScores.map { $0.strokes }.reduce(0, +)
-                              let totalPutts = player.holeScores.map { $0.putts }.reduce(0, +)
-                              ZStack {
-                                Text("\(totalStrokes)")
-                                  .font(.system(size: 35, weight: .bold))
-                                
-                                  GeometryReader { geo in
-                                    Text("\(totalPutts)")
-                                      .font(.system(size: 20, weight: .bold))
-                                      .position(x: geo.size.width - 12, y: geo.size.height - 17)
-                                  }
-                              }
-                              .frame(width: 110, height: 40)
-                              .foregroundColor(.black)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                if let player = round.players.first {
+                                    let totalStrokes = player.holeScores.map { $0.strokes }.reduce(0, +)
+                                    let totalPutts = player.holeScores.map { $0.putts }.reduce(0, +)
+                                    ZStack {
+                                        Text("\(totalStrokes)")
+                                            .font(.system(size: 35, weight: .bold))
+
+                                        GeometryReader { geo in
+                                            Text("\(totalPutts)")
+                                                .font(.system(size: 20, weight: .bold))
+                                                .position(x: geo.size.width - 12, y: geo.size.height - 17)
+                                        }
+                                    }
+                                    .frame(width: 110, height: 40)
+                                    .foregroundColor(.black)
+                                }
+
+                                Text(dateFormatter.string(from: round.date))
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
                             }
-                            
-                            Text(dateFormatter.string(from: round.date))
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
+                            Spacer()
+                            VStack(alignment: .leading) {
+                                Text(round.name)
+                                    .font(.system(size: 18, weight: .bold))
+                                    .foregroundColor(.black)
+                            }
                         }
-                        Spacer()
-                        VStack(alignment: .leading) {
-                          Text(round.name)
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(.black)
-                        }
-                      }
                     }
                 }
                 .onDelete(perform: delete)
@@ -83,17 +83,14 @@ struct HistoryView: View {
         rounds.remove(atOffsets: offsets)
     }
 
-  private var dateFormatter: DateFormatter {
-      let df = DateFormatter()
-      df.locale = Locale(identifier: "ja_JP")
-      df.dateFormat = "yyyy年MM月dd日"
-      return df
-  }
-
+    private var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "ja_JP")
+        df.dateFormat = "yyyy年MM月dd日"
+        return df
+    }
 }
 
-
-
 #Preview {
-  HistoryView(savedRound: .constant(nil))
+    HistoryView(savedRound: .constant(nil))
 }

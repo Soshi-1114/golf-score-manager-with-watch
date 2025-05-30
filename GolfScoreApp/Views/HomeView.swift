@@ -38,7 +38,7 @@ struct HomeView: View {
                             RoundStorage.shared.save(round: round)
                             RoundPersistence.clear()
                             self.round = nil
-                          WCSessionManager.shared.sendRoundClearedToWatch()
+                            WCSessionManager.shared.sendRoundClearedToWatch()
                         }
                         Button("キャンセル", role: .cancel) {}
                     }
@@ -74,24 +74,22 @@ struct HomeView: View {
         }
     }
 
-  func calculateAverageScore() -> Int? {
-      let rounds = RoundStorage.shared.loadAll()
+    func calculateAverageScore() -> Int? {
+        let rounds = RoundStorage.shared.loadAll()
 
-      // プレイヤー1（各ラウンドの1番目のプレイヤー）の合計スコアのみを対象にする
-      let player1Scores = rounds.compactMap { round -> Int? in
-          guard let player1 = round.players.first else { return nil }
-          return player1.holeScores.map { $0.strokes }.reduce(0, +)
-      }
+        // プレイヤー1（各ラウンドの1番目のプレイヤー）の合計スコアのみを対象にする
+        let player1Scores = rounds.compactMap { round -> Int? in
+            guard let player1 = round.players.first else { return nil }
+            return player1.holeScores.map { $0.strokes }.reduce(0, +)
+        }
 
-      guard !player1Scores.isEmpty else { return nil }
+        guard !player1Scores.isEmpty else { return nil }
 
-      let total = player1Scores.reduce(0, +)
-      return total / player1Scores.count
-  }
-
+        let total = player1Scores.reduce(0, +)
+        return total / player1Scores.count
+    }
 }
 
-
-//#Preview {
+// #Preview {
 //    HomeView()
-//}
+// }
