@@ -22,19 +22,23 @@ struct ScoreInputView: View {
 
     func sendScoreToWatch() {
         guard isWatchSyncEnabled else { return }
+        guard !AppModel.shared.isFromWatchUpdate() else { return }
 
-        // 前の送信タスクがあればキャンセル
-        debounceTask?.cancel()
-
-        // 新しい送信タスク
-        let task = DispatchWorkItem {
-            let strokes = round.players.first?.holeScores.map { $0.strokes } ?? Array(repeating: 0, count: 18)
+        let strokes = round.players.first?.holeScores.map { $0.strokes } ?? Array(repeating: 0, count: 18)
             let putts = round.players.first?.holeScores.map { $0.putts } ?? Array(repeating: 0, count: 18)
-            WCSessionManager.shared.sendScoreToWatch(strokes: strokes, putts: putts)
-        }
 
-        debounceTask = task
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: task) // 0.4秒待ってから送信
+            // 差分がない場合は送信しない
+            let (lastStrokes, lastPutts) = AppModel.shared.lastSyncedValues()
+            guard strokes != lastStrokes || putts != lastPutts else {
+                print("⏭ 変化なしのため送信スキップ")
+                return
+            }
+          debounceTask?.cancel()
+          let task = DispatchWorkItem {
+              WCSessionManager.shared.sendScoreToWatch(strokes: strokes, putts: putts)
+          }
+          debounceTask = task
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: task)
     }
 
     var body: some View {

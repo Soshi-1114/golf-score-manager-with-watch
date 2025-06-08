@@ -35,6 +35,7 @@
 		1E9EB35F2DDB50DE00396315 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9EB35D2DDB50DE00396315 /* Models.swift */; };
 		1E9EB3622DDB51BE00396315 /* RoundSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9EB3612DDB51BE00396315 /* RoundSetupView.swift */; };
 		1E9EB3642DDB565900396315 /* ScoreInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9EB3632DDB565800396315 /* ScoreInputView.swift */; };
+		1EA335782DF5CA0100840753 /* ScoreListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA335772DF5CA0100840753 /* ScoreListContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		1E9EB35D2DDB50DE00396315 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		1E9EB3612DDB51BE00396315 /* RoundSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundSetupView.swift; sourceTree = "<group>"; };
 		1E9EB3632DDB565800396315 /* ScoreInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreInputView.swift; sourceTree = "<group>"; };
+		1EA335772DF5CA0100840753 /* ScoreListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 				1E3E13332DE5D59200781B24 /* TotalScoreCell.swift */,
 				1E3E13372DE71AEA00781B24 /* MainTabView.swift */,
 				1E3E13392DE71D4400781B24 /* HomeView.swift */,
+				1EA335772DF5CA0100840753 /* ScoreListContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				1E3E13342DE5D59200781B24 /* TotalScoreCell.swift in Sources */,
 				1E9EB35E2DDB50DE00396315 /* Models.swift in Sources */,
 				1E83D2F62DDB65BD007A76B8 /* RoundStorage.swift in Sources */,
+				1EA335782DF5CA0100840753 /* ScoreListContentView.swift in Sources */,
 				1E3E13382DE71AEA00781B24 /* MainTabView.swift in Sources */,
 				1E3E13402DE8913A00781B24 /* WCSessionManager.swift in Sources */,
 				1E3E13432DE89C2100781B24 /* AppModel.swift in Sources */,

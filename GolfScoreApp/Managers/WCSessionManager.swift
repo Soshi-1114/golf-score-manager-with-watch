@@ -11,6 +11,7 @@ import WatchConnectivity
 
 class WCSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     static let shared = WCSessionManager()
+  var onScoreReceived: ((_ strokes: [Int], _ putts: [Int]) -> Void)? = nil
 
     override private init() {
         super.init()
@@ -47,7 +48,7 @@ class WCSessionManager: NSObject, ObservableObject, WCSessionDelegate {
            let putts = message["putts"] as? [Int]
         {
             DispatchQueue.main.async {
-                AppModel.shared.updateScoresFromWatch(strokes: strokes, putts: putts)
+              self.onScoreReceived?(strokes, putts)
             }
         }
     }

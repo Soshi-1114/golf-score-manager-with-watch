@@ -25,10 +25,7 @@ struct MainTabView: View {
                 .tag(0)
 
             if let savedRound = savedRound {
-                ScoreListView(round: Binding(
-                    get: { savedRound },
-                    set: { self.savedRound = $0 }
-                ))
+                ScoreListView()
                 .id(savedRound.id)
                 .tabItem {
                     Label("スコア表", systemImage: "list.bullet.rectangle")
@@ -76,7 +73,7 @@ struct MainTabView: View {
             RoundSetupView(savedRound: $savedRound, selectedTab: $selectedTab)
         }
         .sheet(item: $previewRound) { round in
-            ScoreListView(round: .constant(round), isEditable: false)
+          ScoreListContentView(round: round, isEditable: false)
         }
         .onReceive(NotificationCenter.default.publisher(for: .navigateToHole)) { notification in
             if let hole = notification.userInfo?["hole"] as? Int {
